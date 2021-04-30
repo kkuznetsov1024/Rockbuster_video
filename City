@@ -1,0 +1,11 @@
+Query to identify the cities in the top 10 countries:
+
+SELECT city, country, SUM(amount) FROM customer
+LEFT JOIN payment ON customer.customer_id=payment.customer_id
+LEFT JOIN address ON customer.address_id=address.address_id
+LEFT JOIN city ON address.city_id = city.city_id
+LEFT JOIN country ON city.country_id=country.country_id
+WHERE country IN ('India','China','United States','Japan',
+'Mexico','Brazil','Russian Federation','Philippines','Turkey',
+'Indonesia')
+GROUP BY city, country
