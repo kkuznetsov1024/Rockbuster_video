@@ -1,0 +1,14 @@
+Query to identify the top 5 customers:
+
+
+SELECT payment.customer_id,SUM(amount) AS sum_of_amount,
+first_name,last_name,city, country
+FROM payment
+LEFT JOIN customer ON payment.customer_id=customer.customer_id
+LEFT JOIN address ON customer.address_id=address.address_id
+LEFT JOIN city ON address.city_id = city.city_id
+LEFT JOIN country ON city.country_id=country.country_id
+GROUP BY payment.customer_id, first_name, last_name, city, 
+country
+ORDER BY SUM(amount) DESC
+LIMIT 5
