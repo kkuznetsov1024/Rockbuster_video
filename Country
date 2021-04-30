@@ -1,0 +1,10 @@
+Query to identify the number of customers and total profit per country:
+
+
+SELECT country, COUNT(DISTINCT customer.customer_id), SUM(amount) FROM customer
+LEFT JOIN payment ON customer.customer_id=payment.customer_id
+LEFT JOIN address ON customer.address_id=address.address_id
+LEFT JOIN city ON address.city_id = city.city_id
+LEFT JOIN country ON city.country_id=country.country_id
+GROUP BY country
+ORDER BY COUNT(customer.customer_id) DESC
